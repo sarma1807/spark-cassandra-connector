@@ -38,6 +38,7 @@ Resolving deltas: 100% (10843/10843), done.
 
 [cass@metalgear spark-cassandra-connector]$ `./sbt/sbt assembly`
 
+(This command might take nearly 10 minutes)
 Output :
 ```
 Attempting to fetch sbt
