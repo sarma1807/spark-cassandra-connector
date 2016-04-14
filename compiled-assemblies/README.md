@@ -1,2 +1,2 @@
 # DataStax spark-cassandra-connector
-# Compiled Assemblies
+### Compiled Assemblies
