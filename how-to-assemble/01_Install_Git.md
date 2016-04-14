@@ -8,5 +8,5 @@
 
 ---
 
-###### System will require direct internet connection (proxy might cause issues)
+##### System will require direct internet connection (proxy might cause issues)
 
