@@ -732,7 +732,5 @@ To adjust logging level use sc.setLogLevel("INFO")
 ```
 /home/cass/work/spark-cassandra-connector/sbt/sbt-launch-0.13.8.jar
 
-/home/cass/work/spark-cassandra-connector/spark-cassandra-connector/target/scala-2.10/spark-cassandra-connector-assembly-1.6.0-M2.jar
-
 /home/cass/work/spark-cassandra-connector/spark-cassandra-connector/target/scala-2.11/spark-cassandra-connector-assembly-1.6.0-M2.jar
 ```
