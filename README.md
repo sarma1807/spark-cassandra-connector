@@ -1,3 +1,3 @@
 # spark-cassandra-connector
 
-spark-cassandra-connector by datastax. assembled build is published here.
+spark-cassandra-connector by DataStax. assembled build is published here.
