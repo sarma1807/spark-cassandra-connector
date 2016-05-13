@@ -1,4 +1,4 @@
-#### spark-cassandra-connector compiled-assemblies Website : 
+#### spark-cassandra-connector compiled-assemblies : 
 ##### https://github.com/sarma1807/spark-cassandra-connector/tree/master/compiled-assemblies
 
 ---
