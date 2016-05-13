@@ -10,6 +10,8 @@
 `/u01/cass/spark-1.6.1-bin-hadoop2.6`
 
 
+##### following command will expect to have internet access ...
+
 [cass@metalgear ~]$ `$SPARK_HOME/bin/spark-shell --packages datastax:spark-cassandra-connector:1.6.0-M2-s_2.10`
 
 ```
@@ -118,6 +120,8 @@ SQL context available as sqlContext.
 
 scala>
 ```
+
+##### above command has downloaded 16 required packages and stored them in `~/.ivy2/` folder.
 
 ---
 
