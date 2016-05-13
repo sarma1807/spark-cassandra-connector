@@ -1,1 +1,6 @@
-# starting spark-shell with spark-cassandra-connector package
+#### Starting spark-shell with spark-cassandra-connector package
+
+#### Official spark-cassandra-connector Package Website : http://spark-packages.org/package/datastax/spark-cassandra-connector
+
+---
+
