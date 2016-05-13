@@ -14,6 +14,7 @@
 
 [cass@metalgear ~]$ `$SPARK_HOME/bin/spark-shell --packages datastax:spark-cassandra-connector:1.6.0-M2-s_2.10`
 
+###### Output :
 ```
 Ivy Default Cache set to: /home/cass/.ivy2/cache
 The jars for the packages stored in: /home/cass/.ivy2/jars
@@ -121,7 +122,7 @@ SQL context available as sqlContext.
 scala>
 ```
 
-##### above command has downloaded 16 required packages and stored them in `~/.ivy2/` folder.
+##### above command has downloaded 16 required packages and saved them in `~/.ivy2/` folder.
 
 ---
 
