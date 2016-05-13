@@ -6,7 +6,7 @@
 
 [cass@metalgear ~]$ `echo $SPARK_HOME`
 
-```/u01/cass/spark-1.6.1-bin-hadoop2.6```
+`/u01/cass/spark-1.6.1-bin-hadoop2.6`
 
 
 [cass@metalgear ~]$ `$SPARK_HOME/bin/spark-shell --packages datastax:spark-cassandra-connector:1.6.0-M2-s_2.10`
