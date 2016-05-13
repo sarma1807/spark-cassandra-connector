@@ -1,5 +1,5 @@
 #### Official spark-cassandra-connector Package Website : 
-http://spark-packages.org/package/datastax/spark-cassandra-connector
+##### http://spark-packages.org/package/datastax/spark-cassandra-connector
 
 ---
 
