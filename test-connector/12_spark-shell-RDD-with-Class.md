@@ -13,19 +13,27 @@ $ `spark-shell --jars /u01/cass/spark-cassandra-connector/spark-cassandra-connec
 // import spark-cassandra-connector
 import com.datastax.spark.connector._
 
-// read cassandra table - returns RDD of CassandraRow objects
-val empsRDD = sc.cassandraTable("cassdemo", "employees")
+// import joda date libraries
+import org.joda.time.DateTime
+import org.joda.time.DateTimeZone
+
+// case class for schema
+case class empRowClass (department_name: String, employee_name: String, employee_id: Int, hire_date: org.joda.time.DateTime, salary: BigDecimal)
+case class empRowClass2 (department_name: String, employee_name: String, salary: BigDecimal)
+
+// read cassandra table - returns RDD of empRowClass objects
+val empsRDD = sc.cassandraTable[empRowClass]("cassdemo", "employees")
 
 // read cassandra table - returns RDD of CassandraRow objects
 // supports SELECTing few columns
 // supports WHERE clause for cassandra side row filtering - not spark filtering
-// val empsRDD = sc.cassandraTable("cassdemo", "employees").select("department_name", "employee_name", "salary").where("department_name = ?", "IT")
+// val empsRDD = sc.cassandraTable[empRowClass2]("cassdemo", "employees").select("department_name", "employee_name", "salary").where("department_name = ?", "IT")
 
 // display initial data
 empsRDD.take(5).foreach(println)
 
 // increment salary by 2%
-val empsRDD_salinc = empsRDD.map(r => (r.getString("department_name"), r.getString("employee_name"), r.getDouble("salary")+(0.02*r.getDouble("salary"))))
+val empsRDD_salinc = empsRDD.map(r => (r.department_name, r.employee_name, r.salary+(0.02*r.salary)))
 
 // display data after salary increment
 empsRDD_salinc.take(5).foreach(println)
@@ -56,45 +64,61 @@ Using Scala version 2.10.5 (Java HotSpot(TM) 64-Bit Server VM, Java 1.8.0_74)
 Type in expressions to have them evaluated.
 Type :help for more information.
 Spark context available as sc.
-16/05/19 14:16:16 WARN ObjectStore: Version information not found in metastore. hive.metastore.schema.verification is not enabled so recording the schema version 1.2.0
-16/05/19 14:16:16 WARN ObjectStore: Failed to get database default, returning NoSuchObjectException
+16/05/19 16:25:28 WARN ObjectStore: Version information not found in metastore. hive.metastore.schema.verification is not enabled so recording the schema version 1.2.0
+16/05/19 16:25:28 WARN ObjectStore: Failed to get database default, returning NoSuchObjectException
+16/05/19 16:25:49 WARN ObjectStore: Version information not found in metastore. hive.metastore.schema.verification is not enabled so recording the schema version 1.2.0
+16/05/19 16:25:50 WARN ObjectStore: Failed to get database default, returning NoSuchObjectException
 SQL context available as sqlContext.
 
 scala> // import spark-cassandra-connector
 scala> import com.datastax.spark.connector._
 import com.datastax.spark.connector._
 
-scala> // read cassandra table - returns RDD of CassandraRow objects
-scala> val empsRDD = sc.cassandraTable("cassdemo", "employees")
-empsRDD: com.datastax.spark.connector.rdd.CassandraTableScanRDD[com.datastax.spark.connector.CassandraRow] = CassandraTableScanRDD[0] at RDD at CassandraRDD.scala:15
+scala> // import joda date libraries
+scala> import org.joda.time.DateTime
+import org.joda.time.DateTime
+
+scala> // case class for schema
+scala> case class empRowClass (department_name: String, employee_name: String, employee_id: Int, hire_date: org.joda.time.DateTime, salary: BigDecimal)
+defined class empRowClass
+
+scala> case class empRowClass2 (department_name: String, employee_name: String, salary: BigDecimal)
+defined class empRowClass2
+
+
+scala> // read cassandra table - returns RDD of empRowClass objects
+scala> val empsRDD = sc.cassandraTable[empRowClass]("cassdemo", "employees")
+empsRDD: com.datastax.spark.connector.rdd.CassandraTableScanRDD[empRowClass] = CassandraTableScanRDD[0] at RDD at CassandraRDD.scala:15
 
 scala> // read cassandra table - returns RDD of CassandraRow objects
 scala> // supports SELECTing few columns
 scala> // supports WHERE clause for cassandra side row filtering - not spark filtering
-scala> // val empsRDD = sc.cassandraTable("cassdemo", "employees").select("department_name", "employee_name", "salary").where("department_name = ?", "IT")
+scala> // val empsRDD = sc.cassandraTable[empRowClass2]("cassdemo", "employees").select("department_name", "employee_name", "salary").where("department_name = ?", "IT")
+
 
 scala> // display initial data
 scala> empsRDD.take(5).foreach(println)
-CassandraRow{department_name: Sales, employee_name: Sell Queen, employee_id: 1004, hire_date: 2016-03-25 00:00:00-0400, salary: 3405.20}
-CassandraRow{department_name: IT, employee_name: John Dow, employee_id: 1002, hire_date: 2016-02-02 00:00:00-0500, salary: 2700.50}
-CassandraRow{department_name: IT, employee_name: Scott Tiger, employee_id: 1001, hire_date: 2016-01-01 00:00:00-0500, salary: 2300.00}
-CassandraRow{department_name: Finance, employee_name: Larry Emperor, employee_id: 1003, hire_date: 2016-02-15 00:00:00-0500, salary: 2250.00}
+empRowClass(Sales,Sell Queen,1004,2016-03-25T00:00:00.000-04:00,3405.20)
+empRowClass(IT,John Dow,1002,2016-02-02T00:00:00.000-05:00,2700.50)
+empRowClass(IT,Scott Tiger,1001,2016-01-01T00:00:00.000-05:00,2300.00)
+empRowClass(Finance,Larry Emperor,1003,2016-02-15T00:00:00.000-05:00,2250.00)
 
 scala> // increment salary by 2%
-scala> val empsRDD_salinc = empsRDD.map(r => (r.getString("department_name"), r.getString("employee_name"), r.getDouble("salary")+(0.02*r.getDouble("salary"))))
-empsRDD_salinc: org.apache.spark.rdd.RDD[(String, String, Double)] = MapPartitionsRDD[2] at map at <console>:32
+scala> val empsRDD_salinc = empsRDD.map(r => (r.department_name, r.employee_name, r.salary+(0.02*r.salary)))
+empsRDD_salinc: org.apache.spark.rdd.RDD[(String, String, scala.math.BigDecimal)] = MapPartitionsRDD[2] at map at <console>:36
 
 scala> // display data after salary increment
 scala> empsRDD_salinc.take(5).foreach(println)
-(Sales,Sell Queen,3473.3039999999996)
-(IT,John Dow,2754.51)
-(IT,Scott Tiger,2346.0)
-(Finance,Larry Emperor,2295.0)
+(Sales,Sell Queen,3473.3040)
+(IT,John Dow,2754.5100)
+(IT,Scott Tiger,2346.0000)
+(Finance,Larry Emperor,2295.0000)
+
 
 scala> // save updated data to cassandra
 scala> empsRDD_salinc.saveToCassandra("cassdemo", "employees", SomeColumns("department_name", "employee_name", "salary")) 
 
-scala> 
+scala>
 ```
 
 ---
