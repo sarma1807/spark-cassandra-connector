@@ -6,6 +6,8 @@ $ `spark-shell --jars /u01/cass/spark-cassandra-connector/spark-cassandra-connec
 
 ---
 
+#### code :
+
 ```
 
 // import spark-cassandra-connector
@@ -32,4 +34,14 @@ empsRDD_salinc.take(5).foreach(println)
 empsRDD_salinc.saveToCassandra("cassdemo", "employees", SomeColumns("department_name", "employee_name", "salary"))
 
 ```
+
+---
+
+#### output :
+
+```
+
+```
+
+---
 
