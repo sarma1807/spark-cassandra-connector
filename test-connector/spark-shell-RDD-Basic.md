@@ -1,6 +1,5 @@
 ### spark-cassandra-connector using spark-shell - Basic RDD
 
----
 
 #### start spark-shell along with spark-cassandra-connector jar
 $ `spark-shell --jars /u01/cass/spark-cassandra-connector/spark-cassandra-connector-assembly-1.6.0-M2-ef47431-scala-2.10-20160504.jar`
