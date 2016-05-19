@@ -24,7 +24,7 @@ case class empRowClass2 (department_name: String, employee_name: String, salary:
 // read cassandra table - returns RDD of empRowClass objects
 val empsRDD = sc.cassandraTable[empRowClass]("cassdemo", "employees")
 
-// read cassandra table - returns RDD of CassandraRow objects
+// read cassandra table - returns RDD of empRowClass2 objects
 // supports SELECTing few columns
 // supports WHERE clause for cassandra side row filtering - not spark filtering
 // val empsRDD = sc.cassandraTable[empRowClass2]("cassdemo", "employees").select("department_name", "employee_name", "salary").where("department_name = ?", "IT")
@@ -90,7 +90,7 @@ scala> // read cassandra table - returns RDD of empRowClass objects
 scala> val empsRDD = sc.cassandraTable[empRowClass]("cassdemo", "employees")
 empsRDD: com.datastax.spark.connector.rdd.CassandraTableScanRDD[empRowClass] = CassandraTableScanRDD[0] at RDD at CassandraRDD.scala:15
 
-scala> // read cassandra table - returns RDD of CassandraRow objects
+scala> // read cassandra table - returns RDD of empRowClass2 objects
 scala> // supports SELECTing few columns
 scala> // supports WHERE clause for cassandra side row filtering - not spark filtering
 scala> // val empsRDD = sc.cassandraTable[empRowClass2]("cassdemo", "employees").select("department_name", "employee_name", "salary").where("department_name = ?", "IT")
